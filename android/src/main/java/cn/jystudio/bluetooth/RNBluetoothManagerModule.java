@@ -137,8 +137,14 @@ public class RNBluetoothManagerModule extends ReactContextBaseJavaModule
             for (BluetoothDevice d : boundDevices) {
                 try {
                     JSONObject obj = new JSONObject();
+                    // obj.put("name", d.getName());
+                    // obj.put("address", d.getAddress());
                     obj.put("name", d.getName());
                     obj.put("address", d.getAddress());
+                    obj.put("id", d.getAddress());
+                    if (d.getBluetoothClass() != null) {
+                        obj.put("class", d.getBluetoothClass().getDeviceClass());
+                    }
                     pairedDeivce.pushString(obj.toString());
                 } catch (Exception e) {
                     //ignore.
@@ -175,11 +181,11 @@ public class RNBluetoothManagerModule extends ReactContextBaseJavaModule
             promise.reject(EVENT_BLUETOOTH_NOT_SUPPORT);
         }else {
             cancelDisCovery();
-            int permissionChecked = ContextCompat.checkSelfPermission(reactContext, android.Manifest.permission.ACCESS_COARSE_LOCATION);
+            int permissionChecked = ContextCompat.checkSelfPermission(reactContext, android.Manifest.permission.ACCESS_FINE_LOCATION);
             if (permissionChecked == PackageManager.PERMISSION_DENIED) {
                 // // TODO: 2018/9/21
                 ActivityCompat.requestPermissions(reactContext.getCurrentActivity(),
-                        new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         1);
             }
 
@@ -190,8 +196,14 @@ public class RNBluetoothManagerModule extends ReactContextBaseJavaModule
             for (BluetoothDevice d : boundDevices) {
                 try {
                     JSONObject obj = new JSONObject();
+                    // obj.put("name", d.getName());
+                    // obj.put("address", d.getAddress());
                     obj.put("name", d.getName());
                     obj.put("address", d.getAddress());
+                    obj.put("id", d.getAddress());
+                    if (d.getBluetoothClass() != null) {
+                        obj.put("class", d.getBluetoothClass().getDeviceClass());
+                    }
                     pairedDeivce.put(obj);
                 } catch (Exception e) {
                     //ignore.
@@ -356,8 +368,14 @@ public class RNBluetoothManagerModule extends ReactContextBaseJavaModule
                         for (BluetoothDevice d : boundDevices) {
                             try {
                                 JSONObject obj = new JSONObject();
+                                // obj.put("name", d.getName());
+                                // obj.put("address", d.getAddress());
                                 obj.put("name", d.getName());
                                 obj.put("address", d.getAddress());
+                                obj.put("id", d.getAddress());
+                                if (d.getBluetoothClass() != null) {
+                                    obj.put("class", d.getBluetoothClass().getDeviceClass());
+                                }
                                 pairedDeivce.pushString(obj.toString());
                             } catch (Exception e) {
                                 //ignore.
